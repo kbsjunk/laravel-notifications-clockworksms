@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notification;
 use MJErwin\Clockwork\ClockworkClient;
 use Exception;
 
-class ClockworkSMSChannel
+class ClockworkSmsChannel
 {
     /**
      * @var \MJErwin\Clockwork\ClockworkClient
