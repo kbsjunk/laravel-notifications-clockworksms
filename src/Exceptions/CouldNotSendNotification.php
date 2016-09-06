@@ -8,4 +8,5 @@ class CouldNotSendNotification extends \Exception
     {
         return new static('Descriptive error message.');
     }
+
 }

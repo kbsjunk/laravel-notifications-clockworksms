@@ -3,8 +3,11 @@
 namespace NotificationChannels\ClockworkSms;
 
 use NotificationChannels\ClockworkSms\Exceptions\CouldNotSendNotification;
+use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use MJErwin\Clockwork\ClockworkClient;
+use MJErwin\Clockwork\Message;
+use Exception;
 
 class ClockworkSmsChannel
 {
@@ -18,9 +21,10 @@ class ClockworkSmsChannel
     */
     private $events;
 
-    public function __construct(ClockworkClient $client Dispatcher $events)
+    public function __construct(ClockworkClient $client, Dispatcher $events)
     {
         $this->client = $client;
+        $this->events = $events;
     }
 
     /**
@@ -40,25 +44,43 @@ class ClockworkSmsChannel
         }
         try {
             $message = $notification->toClockworkSms($notifiable);
-            if (is_string($message)) {
-                $message = new ClockworkSmsMessage($message);
-            }
-            if (! $message instanceof TwilioAbstractMessage) {
-                throw CouldNotSendNotification::invalidMessageObject($message);
-            }
-            if (! $from = $message->from ?: config('services.twilio.from')) {
-                throw CouldNotSendNotification::missingFrom();
-            }
-            return $this->sendMessage($message, $from, $to);
-        } catch (Exception $exception) {
-            $this->events->fire(
-            new NotificationFailed($notifiable, $notification, 'twilio', ['message' => $exception->getMessage()])
-        );
-    }
-    //$response = [a call to the api of your notification send]
 
-    //        if ($response->error) { // replace this by the code need to check for errors
-    //            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
-    //        }
-}
+            $message = new ClockworkSmsMessage($message);
+            $message->to($to);
+            $message->from(config('services.clockworksms.from'));
+            $message->truncate(config('services.clockworksms.truncate'));
+            $message->invalidChars(config('services.clockworksms.invalid_chars'));
+
+            $response = $this->sendMessage($message);
+
+        }
+        catch (Exception $exception) {
+            $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
+        }
+
+    }
+
+    /**
+    * @param $message
+    * @param $from
+    * @param $to
+    * @return mixed
+    *
+    * @throws \NotificationChannels\ClockworkSms\Exceptions\CouldNotSendNotification
+    */
+    protected function sendMessage($message)
+    {
+
+        try {
+            $message = new
+            $response = $this->client->sendMessage($message);
+
+            return $response;
+        }
+        catch (Exception $e) {
+            throw CouldNotSendNotification::serviceRespondedWithAnError($response);
+        }
+
+    }
+
 }
