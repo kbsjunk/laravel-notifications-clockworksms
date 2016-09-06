@@ -11,6 +11,8 @@
 
 This package makes it easy to send notifications using [Clockwork SMS](https://www.clockworksms.com) with Laravel 5.3.
 
+***Important! This package is a work in progress and is not complete. It is not ready for development or production.***
+
 ## Contents
 
 - [Installation](#installation)
