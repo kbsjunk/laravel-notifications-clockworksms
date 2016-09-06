@@ -8,14 +8,13 @@ use MJErwin\Clockwork\ClockworkClient;
 class ClockworkSmsServiceProvider extends ServiceProvider
 {
     /**
-    * Bootstrap the application services.
-    */
+     * Bootstrap the application services.
+     */
     public function boot()
     {
         $this->app->when(ClockworkSmsChannel::class)
         ->needs(ClockworkClient::class)
         ->give(function () {
-
             $client = new ClockworkClient(config('services.clockworksms.key'));
 
             $client->setTruncateEnabled(config('services.clockworksms.truncate'));
@@ -43,8 +42,8 @@ class ClockworkSmsServiceProvider extends ServiceProvider
     }
 
     /**
-    * Register the application services.
-    */
+     * Register the application services.
+     */
     public function register()
     {
     }
