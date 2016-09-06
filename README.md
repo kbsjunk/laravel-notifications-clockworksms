@@ -37,19 +37,80 @@ This is where your description should go. Add a little code example so build can
 
 ## Installation
 
-Please also include the steps for any third-party service setup that's required for this package.
+You can install the package via composer:
+
+``` bash
+composer require laravel-notification-channels/clockworksms
+```
+
+You must install the service provider:
+
+```php
+// config/app.php
+'providers' => [
+    ...
+    NotificationChannels\ClockworkSms\ClockworkSmsProvider::class,
+],
+```
 
 ### Setting up the Clockwork SMS service
 
-Optionally include a few steps how users can set up the service.
+Add your Clockwork SMS API Key, From Number and other options (optional) to your `config/services.php`:
+
+```php
+// config/services.php
+...
+'clockworksms' => [
+    'key' => env('CLOCKWORKSMS_KEY'),
+    'from' => env('CLOCKWORKSMS_FROM'), //optional
+    'truncate' => null, // optional: true or false
+    'invalid_chars' => null, // optional: 'error', 'remove', 'replace'
+],
+...
+```
 
 ## Usage
 
-Some code examples, make it clear how to use the package
+Now you can use the channel in your `via()` method inside the notification:
+
+``` php
+use NotificationChannels\ClockworkSms\ClockworkSmsChannel;
+use NotificationChannels\ClockworkSms\ClockworkSmsSmsMessage;
+use Illuminate\Notifications\Notification;
+
+class AccountApproved extends Notification
+{
+    public function via($notifiable)
+    {
+        return [ClockworkSmsChannel::class];
+    }
+
+    public function toClockworkSms($notifiable)
+    {
+        return (new ClockworkSmsMessage())
+            ->content("Your account was approved!");
+    }
+}
+```
+
+In order to let your Notification know which phone are you sending to, the channel will look for the `phone_number` attribute of the Notifiable model. If you want to override this behaviour, add the `routeNotificationForClockworkSms` method to your Notifiable model.
+
+```php
+public function routeNotificationForClockworkSms()
+{
+    return $this->mobile_telephone;
+}
+```
 
 ### Available methods
 
-A list of all available options
+#### ClockworkSmsMessage
+
+- `to('')`: Accepts a phone number to use as the notification recipient. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#to))
+- `from('')`: Accepts a phone number or name to use as the notification sender. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#from))
+- `content('')`: Accepts a string value for the notification body. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#content))
+- `truncate('')`: Accepts a boolean value for whether the notification will be truncated if too long. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#truncate))
+- `invalidChars('')`: Accepts a string value of 'error', 'replace' or 'remove' to determine what will be done with invalid characters in the message. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#invalidcharaction))
 
 ## Changelog
 
