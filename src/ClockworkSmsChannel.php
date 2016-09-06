@@ -15,15 +15,9 @@ class ClockworkSmsChannel
      */
     protected $client;
 
-    /**
-     * @var \Illuminate\Events\Dispatcher
-     */
-    private $events;
-
-    public function __construct(ClockworkClient $client, Dispatcher $events)
+    public function __construct(ClockworkClient $client)
     {
         $this->client = $client;
-        $this->events = $events;
     }
 
     /**
@@ -54,7 +48,8 @@ class ClockworkSmsChannel
                 throw CouldNotSendNotification::invalidMessageObject($message);
             }
 
-            $response = $this->sendMessage($message);
+            $this->sendMessage($message);
+            
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
