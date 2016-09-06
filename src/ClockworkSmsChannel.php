@@ -24,7 +24,7 @@ class ClockworkSmsChannel
     public function __construct(ClockworkClient $client, Dispatcher $events)
     {
         $this->client = $client;
-        $this->events = $events
+        $this->events = $events;
     }
 
     /**
