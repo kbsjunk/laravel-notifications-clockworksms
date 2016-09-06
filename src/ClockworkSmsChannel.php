@@ -35,7 +35,7 @@ class ClockworkSmsChannel
                 return;
             }
         }
-        
+
         try {
             $message = $notification->toClockworkSms($notifiable);
 
@@ -43,7 +43,7 @@ class ClockworkSmsChannel
                 $message = new ClockworkSmsMessage($message);
             }
 
-            if (!$message instanceof ClockworkSmsMessage) {
+            if (! $message instanceof ClockworkSmsMessage) {
                 throw CouldNotSendNotification::invalidMessageObject($message);
             }
 
