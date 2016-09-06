@@ -11,18 +11,14 @@ class CouldNotSendNotification extends \Exception
 
     public static function invalidMessageObject($message)
     {
-
-        if (!$message->getMessage()->getNumber()) {
+        if (! $message->getMessage()->getNumber()) {
             $message = 'No number set in the message.';
-        }
-        elseif (!$message->getMessage()->getContent()) {
+        } elseif (! $message->getMessage()->getContent()) {
             $message = 'No content set in the message.';
-        }
-        else {
+        } else {
             $message = 'The message is not valid.';
         }
 
         return new static($message);
     }
-
 }
