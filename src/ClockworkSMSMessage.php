@@ -2,65 +2,116 @@
 
 namespace NotificationChannels\ClockworkSms;
 
+use MJErwin\Clockwork\ClockworkClient;
+use MJErwin\Clockwork\Message;
+
 class ClockworkSmsMessage
 {
     /**
-     * The message content.
-     *
-     * @var string
-     */
-    public $content;
-    
+    * The underlying client message.
+    *
+    * @var \MJErwin\Clockwork\Message
+    */
+    protected $message;
+
     /**
-     * The phone number the message should be sent from.
-     *
-     * @var string
-     */
-    public $from;
-    
-    /**
-     * @param string $content
-     *
-     * @return static
-     */
-    public static function create($content = '')
+    * @param string $content
+    *
+    * @return static
+    */
+    public static function create()
     {
-        return new static($content);
+        return new static();
     }
-    
+
     /**
-     * Create a new message instance.
-     *
-     * @param  string  $content
-     */
-    public function __construct($content = '')
+    * Create a new message instance.
+    *
+    * @param  string  $content
+    */
+    public function __construct()
     {
-        $this->content = $content;
+        $this->message = new Message;
     }
-    
+
     /**
-     * Set the message content.
-     *
-     * @param  string  $content
-     *
-     * @return $this
-     */
+    * Set the message content.
+    *
+    * @param  string  $content
+    *
+    * @return $this
+    */
     public function content($content)
     {
-        $this->content = $content;
+        $this->message->setContent($content);
         return $this;
     }
-    
+
     /**
-     * Set the phone number the message should be sent from.
-     *
-     * @param  string  $from
-     *
-     * @return $this
-     */
+    * Set the phone number or name the message should be sent from.
+    *
+    * @param  string  $from
+    *
+    * @return $this
+    */
     public function from($from)
     {
-        $this->from = $from;
+        $this->message->setFrom($from);
+        return $this;
+    }
+
+    /**
+    * Set the phone number the message should be sent to.
+    *
+    * @param  string  $to
+    *
+    * @return $this
+    */
+    public function to($to)
+    {
+        $this->message->setNumber($to);
+        return $this;
+    }
+
+    /**
+    * Set whether the message will be truncated if too long.
+    *
+    * @param  bool  $truncate
+    *
+    * @return $this
+    */
+    public function truncate($truncate)
+    {
+        $this->message->setTruncateEnabled($truncate);
+        return $this;
+    }
+
+    /**
+    * Set what to do with any invalid characters in the message content.
+    *
+    * @param  bool  $truncate
+    *
+    * @return $this
+    */
+    public function invalidChars($invalidChars)
+    {
+
+        switch ($invalidChars) {
+            case 'error':
+            $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_RETURN_ERROR;
+            break;
+            case 'remove':
+            $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_REMOVE_CHARS;
+            break;
+            case 'replace':
+            $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_REPLACE_CHARS;
+            break;
+            default:
+            $invalidChars = null;
+        }
+
+        $this->message->setInvalidCharAction($invalidChars);
+
         return $this;
     }
 }
