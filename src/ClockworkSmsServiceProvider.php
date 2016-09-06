@@ -17,7 +17,9 @@ class ClockworkSmsServiceProvider extends ServiceProvider
         ->give(function () {
             $client = new ClockworkClient(config('services.clockworksms.key'));
 
-            $client->setTruncateEnabled(config('services.clockworksms.truncate'));
+            if ($truncate = config('services.clockworksms.truncate')) {
+                $client->setTruncateEnabled($truncate);
+            }
 
             $invalidChars = config('services.clockworksms.invalid_chars');
 
@@ -35,7 +37,9 @@ class ClockworkSmsServiceProvider extends ServiceProvider
                 $invalidChars = null;
             }
 
-            $client->setInvalidCharAction($invalidChars);
+            if ($invalidChars) {
+                $client->setInvalidCharAction($invalidChars);
+            }
 
             return $client;
         });
