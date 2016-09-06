@@ -35,10 +35,18 @@ class ClockworkSmsChannel
                 return;
             }
         }
+        
         try {
             $message = $notification->toClockworkSms($notifiable);
 
-            $message = new ClockworkSmsMessage($message);
+            if (is_string($message)) {
+                $message = new ClockworkSmsMessage($message);
+            }
+
+            if (!$message instanceof ClockworkSmsMessage) {
+                throw CouldNotSendNotification::invalidMessageObject($message);
+            }
+
             $message->to($to);
             $message->from(config('services.clockworksms.from'));
             $message->truncate(config('services.clockworksms.truncate'));
