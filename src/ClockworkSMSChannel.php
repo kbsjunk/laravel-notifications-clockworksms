@@ -7,7 +7,7 @@ use NotificationChannels\ClockworkSMS\Events\MessageWasSent;
 use NotificationChannels\ClockworkSMS\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
-class Clockwork MSChannel
+class ClockworkSMSChannel
 {
     public function __construct()
     {
