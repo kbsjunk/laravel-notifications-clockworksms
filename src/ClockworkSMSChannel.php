@@ -55,7 +55,6 @@ class ClockworkSMSChannel
             }
 
             $response = $this->sendMessage($message);
-
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
