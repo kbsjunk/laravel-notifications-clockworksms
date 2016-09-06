@@ -5,14 +5,13 @@ namespace NotificationChannels\ClockworkSms;
 use Illuminate\Support\ServiceProvider;
 use MJErwin\Clockwork\ClockworkClient;
 
-class ClockworkSmsServiceProvider extends ServiceProvider
+class ClockworkSMSServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      */
     public function boot()
     {
-
         $this->app->when(ClockworkSmsChannel::class)
             ->needs(ClockworkClient::class)
             ->give(function () {
@@ -20,7 +19,6 @@ class ClockworkSmsServiceProvider extends ServiceProvider
 
                 return new ClockworkClient($apiKey);
             });
-
     }
 
     /**
