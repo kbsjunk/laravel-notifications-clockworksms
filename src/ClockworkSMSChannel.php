@@ -55,6 +55,7 @@ class ClockworkSMSChannel
             }
 
             $response = $this->sendMessage($message);
+
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
@@ -70,12 +71,12 @@ class ClockworkSMSChannel
      */
     protected function sendMessage($message)
     {
-        try {
-            $response = $this->client->sendMessage($message->getMessage());
+        $response = $this->client->sendMessage($message->getMessage());
 
-            return $response;
-        } catch (Exception $e) {
+        if ($response->hasErrors()) {
             throw CouldNotSendNotification::serviceRespondedWithAnError($response);
         }
+
+        return $response;
     }
 }

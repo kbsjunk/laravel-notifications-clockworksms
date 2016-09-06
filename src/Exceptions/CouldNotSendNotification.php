@@ -6,7 +6,10 @@ class CouldNotSendNotification extends \Exception
 {
     public static function serviceRespondedWithAnError($response)
     {
-        return new static('Descriptive error message.');
+        $code = $response->getErrorCode();
+        $description = $response->getErrorDescription();
+
+        return new static("Error {$code}: $description");
     }
 
     public static function invalidMessageObject($message)
