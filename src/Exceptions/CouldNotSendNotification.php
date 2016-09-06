@@ -24,8 +24,7 @@ class CouldNotSendNotification extends \Exception
             } else {
                 $message = 'Notification was not sent. Message is invalid.';
             }
-        }
-        else {
+        } else {
             $className = get_class($message) ?: 'Unknown';
             $message = "Notification was not sent. Message object class `{$className}` is invalid. It must be `".ClockworkSmsMessage::class.'`.';
         }
