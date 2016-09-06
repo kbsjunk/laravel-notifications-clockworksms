@@ -5,7 +5,7 @@ namespace NotificationChannels\ClockworkSms;
 use Illuminate\Support\ServiceProvider;
 use MJErwin\Clockwork\ClockworkClient;
 
-class ClockworkSMSServiceProvider extends ServiceProvider
+class ClockworkSmsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
