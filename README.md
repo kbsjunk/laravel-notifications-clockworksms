@@ -98,11 +98,11 @@ public function routeNotificationForClockworkSms()
 
 #### ClockworkSmsMessage
 
-- `to('')`: Accepts a phone number to use as the notification recipient. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#to))
-- `from('')`: Accepts a phone number or name to use as the notification sender. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#from))
-- `content('')`: Accepts a string value for the notification body. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#content))
-- `truncate('')`: Accepts a boolean value for whether the notification will be truncated if too long. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#truncate))
-- `invalidChars('')`: Accepts a string value of `'error'`, `'replace'` or `'remove'` to determine what will be done with invalid characters in the message. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#invalidcharaction))
+- `to(string $to)`: Accepts a phone number to use as the notification recipient. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#to))
+- `from(string $from)`: Accepts a phone number or name to use as the notification sender. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#from))
+- `content(string $content)`: Accepts a string value for the notification body. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#content))
+- `truncate(boolean $truncate)`: Accepts a boolean value for whether the notification will be truncated if too long. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#truncate))
+- `invalidChars(string $invalid)`: Accepts a string value of `'error'`, `'replace'` or `'remove'` to determine what will be done with invalid characters in the message. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#invalidcharaction))
 
 ## Changelog
 
