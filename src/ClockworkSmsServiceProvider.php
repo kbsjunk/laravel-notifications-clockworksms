@@ -8,22 +8,43 @@ use MJErwin\Clockwork\ClockworkClient;
 class ClockworkSmsServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap the application services.
-     */
+    * Bootstrap the application services.
+    */
     public function boot()
     {
         $this->app->when(ClockworkSmsChannel::class)
-            ->needs(ClockworkClient::class)
-            ->give(function () {
-                $apiKey = config('services.clockworksms.key');
+        ->needs(ClockworkClient::class)
+        ->give(function () {
 
-                return new ClockworkClient($apiKey);
-            });
+            $client = new ClockworkClient(config('services.clockworksms.key'));
+
+            $client->setTruncateEnabled(config('services.clockworksms.truncate'));
+
+            $invalidChars = config('services.clockworksms.invalid_chars');
+
+            switch ($invalidChars) {
+                case 'error':
+                $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_RETURN_ERROR;
+                break;
+                case 'remove':
+                $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_REMOVE_CHARS;
+                break;
+                case 'replace':
+                $invalidChars = ClockworkClient::INVALID_CHAR_ACTION_REPLACE_CHARS;
+                break;
+                default:
+                $invalidChars = null;
+            }
+
+            $client->setInvalidCharAction($invalidChars);
+
+            return $client;
+        });
     }
 
     /**
-     * Register the application services.
-     */
+    * Register the application services.
+    */
     public function register()
     {
     }

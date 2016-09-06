@@ -49,8 +49,6 @@ class ClockworkSmsChannel
 
             $message->to($to);
             $message->from(config('services.clockworksms.from'));
-            $message->truncate(config('services.clockworksms.truncate'));
-            $message->invalidChars(config('services.clockworksms.invalid_chars'));
 
             if (! $message->isValid()) {
                 throw CouldNotSendNotification::invalidMessageObject($message);

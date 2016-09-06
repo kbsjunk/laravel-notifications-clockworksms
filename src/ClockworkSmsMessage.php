@@ -77,20 +77,6 @@ class ClockworkSmsMessage
     }
 
     /**
-     * Set whether the message will be truncated if too long.
-     *
-     * @param  bool  $truncate
-     *
-     * @return $this
-     */
-    public function truncate($truncate)
-    {
-        $this->message->setTruncateEnabled($truncate);
-
-        return $this;
-    }
-
-    /**
      * Set what to do with any invalid characters in the message content.
      *
      * @param  bool  $truncate
