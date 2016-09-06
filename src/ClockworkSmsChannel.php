@@ -49,7 +49,7 @@ class ClockworkSmsChannel
             }
 
             $this->sendMessage($message);
-            
+
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
@@ -63,7 +63,7 @@ class ClockworkSmsChannel
      *
      * @throws \NotificationChannels\ClockworkSms\Exceptions\CouldNotSendNotification
      */
-    protected function sendMessage($message)
+    protected function sendMessage(ClockworkSmsMessage $message)
     {
         $response = $this->client->sendMessage($message->getMessage());
 
