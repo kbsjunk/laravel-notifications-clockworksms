@@ -114,4 +114,22 @@ class ClockworkSmsMessage
 
         return $this;
     }
+
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    public function setMessage(Message $message)
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function isValid()
+    {
+        return $message->getMessage()->getNumber() && $message->getMessage()->getContent();
+    }
+
 }

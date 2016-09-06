@@ -6,7 +6,7 @@ use NotificationChannels\ClockworkSms\Exceptions\CouldNotSendNotification;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use MJErwin\Clockwork\ClockworkClient;
-use MJErwin\Clockwork\Message;
+
 use Exception;
 
 class ClockworkSmsChannel
@@ -51,6 +51,10 @@ class ClockworkSmsChannel
             $message->truncate(config('services.clockworksms.truncate'));
             $message->invalidChars(config('services.clockworksms.invalid_chars'));
 
+            if (!$message->isValid()) {
+                throw CouldNotSendNotification::invalidMessageObject($message);
+            }
+
             $response = $this->sendMessage($message);
 
         }
@@ -72,8 +76,7 @@ class ClockworkSmsChannel
     {
 
         try {
-            $message = new
-            $response = $this->client->sendMessage($message);
+            $response = $this->client->sendMessage($message->getMessage());
 
             return $response;
         }
