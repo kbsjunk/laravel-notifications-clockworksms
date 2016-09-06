@@ -1,13 +1,11 @@
 <?php
 /**
- * Clockwork PHP API
+ * Clockwork PHP API.
  *
- * @package     Clockwork
  * @copyright   Mediaburst Ltd 2012
  * @license     MIT
  * @link        http://www.clockworksms.com
  */
-
 namespace NotificationChannels\ClockworkSMS\Exceptions;
 
 use Exception;
@@ -22,10 +20,11 @@ use Exception;
  * @subpackage  Exception
  * @since       1.0
  */
-class ClockworkSMSException extends Exception {
-
-    public function __construct( $message, $code = 0 ) {
+class ClockworkSMSException extends Exception
+{
+    public function __construct($message, $code = 0)
+    {
         // make sure everything is assigned properly
-        parent::__construct( $message, $code );
+        parent::__construct($message, $code);
     }
 }

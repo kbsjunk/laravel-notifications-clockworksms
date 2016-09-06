@@ -3,8 +3,6 @@
 namespace NotificationChannels\ClockworkSMS;
 
 use NotificationChannels\ClockworkSMS\Exceptions\CouldNotSendNotification;
-use NotificationChannels\ClockworkSMS\Events\MessageWasSent;
-use NotificationChannels\ClockworkSMS\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
 class ClockworkSMSChannel
