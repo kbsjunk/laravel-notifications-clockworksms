@@ -41,7 +41,7 @@ You must install the service provider:
 // config/app.php
 'providers' => [
     ...
-    NotificationChannels\ClockworkSms\ClockworkSmsProvider::class,
+    NotificationChannels\ClockworkSms\ClockworkSmsServiceProvider::class,
 ],
 ```
 
@@ -67,7 +67,7 @@ Now you can use the channel in your `via()` method inside the notification:
 
 ``` php
 use NotificationChannels\ClockworkSms\ClockworkSmsChannel;
-use NotificationChannels\ClockworkSms\ClockworkSmsSmsMessage;
+use NotificationChannels\ClockworkSms\ClockworkSmsMessage;
 use Illuminate\Notifications\Notification;
 
 class AccountApproved extends Notification

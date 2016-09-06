@@ -57,7 +57,7 @@ class ClockworkSmsMessage
      */
     public function from($from)
     {
-        $this->message->setFrom($from);
+        $this->message->setFromName($from);
 
         return $this;
     }
