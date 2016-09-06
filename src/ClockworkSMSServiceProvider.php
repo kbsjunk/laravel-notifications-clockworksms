@@ -1,33 +1,26 @@
 <?php
 
-namespace NotificationChannels\ClockworkSMS;
+namespace NotificationChannels\ClockworkSms;
 
 use Illuminate\Support\ServiceProvider;
+use MJErwin\Clockwork\ClockworkClient;
 
-class ClockworkSMSServiceProvider extends ServiceProvider
+class ClockworkSmsServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
      */
     public function boot()
     {
-        // Bootstrap code here.
 
-        /*
-         * Here's some example code we use for the pusher package.
-
-        $this->app->when(Channel::class)
-            ->needs(Pusher::class)
+        $this->app->when(ClockworkSmsChannel::class)
+            ->needs(ClockworkClient::class)
             ->give(function () {
-                $pusherConfig = config('broadcasting.connections.pusher');
+                $apiKey = config('services.clockworksms.key');
 
-                return new Pusher(
-                    $pusherConfig['key'],
-                    $pusherConfig['secret'],
-                    $pusherConfig['app_id']
-                );
+                return new ClockworkClient($apiKey);
             });
-         */
+
     }
 
     /**

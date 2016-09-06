@@ -1,8 +1,10 @@
 <?php
 
-namespace NotificationChannels\ClockworkSMS;
+namespace NotificationChannels\ClockworkSms;
 
-class ClockworkSMSMessage
+
+
+class ClockworkSmsMessage
 {
     // Message structure here
 }

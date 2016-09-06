@@ -1,6 +1,6 @@
 <?php
 
-namespace NotificationChannels\ClockworkSMS\Exceptions;
+namespace NotificationChannels\ClockworkSms\Exceptions;
 
 class CouldNotSendNotification extends \Exception
 {
