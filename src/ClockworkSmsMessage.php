@@ -5,7 +5,7 @@ namespace NotificationChannels\ClockworkSms;
 use MJErwin\Clockwork\ClockworkClient;
 use MJErwin\Clockwork\Message;
 
-class ClockworkSMSMessage
+class ClockworkSmsMessage
 {
     /**
      * The underlying client message.
