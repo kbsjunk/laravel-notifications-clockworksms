@@ -118,6 +118,6 @@ class ClockworkSmsMessage
 
     public function isValid()
     {
-        return $message->getMessage()->getNumber() && $message->getMessage()->getContent();
+        return $this->getMessage()->getNumber() && $this->getMessage()->getContent();
     }
 }

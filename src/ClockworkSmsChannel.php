@@ -43,7 +43,7 @@ class ClockworkSmsChannel
             }
         }
 
-        try {
+        // try {
             $message = $notification->toClockworkSms($notifiable);
 
             if (is_string($message)) {
@@ -62,9 +62,9 @@ class ClockworkSmsChannel
             }
 
             $this->sendMessage($message);
-        } catch (Exception $exception) {
-            $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
-        }
+        // } catch (Exception $exception) {
+            // $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
+        // }
     }
 
     /**
