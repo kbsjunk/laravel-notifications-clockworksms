@@ -49,7 +49,10 @@ class ClockworkSmsChannel
             }
 
             $this->sendMessage($message);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
