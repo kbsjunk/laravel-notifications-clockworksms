@@ -1,13 +1,13 @@
 {
-    "name": "laravel-notification-channels/:package_name",
-    "description": ":package_description",
-    "homepage": "https://github.com/laravel-notification-channels/:package_name",
+    "name": "laravel-notification-channels/clockworksms",
+    "description": "A Laravel 5.3 Notification provider for Clockwork SMS.",
+    "homepage": "https://github.com/laravel-notification-channels/clockworksms",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
-            "homepage": ":author_website",
+            "name": "Kitbs",
+            "email": "mail@kitbs.com",
+            "homepage": "http://kitbs.com",
             "role": "Developer"
         }
     ],
@@ -22,12 +22,12 @@
     },
     "autoload": {
         "psr-4": {
-            "NotificationChannels\\:channel_namespace\\": "src"
+            "NotificationChannels\\ClockworkSMS\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NotificationChannels\\:channel_namespace\\Test\\": "tests"
+            "NotificationChannels\\ClockworkSMS\\Test\\": "tests"
         }
     },
     "scripts": {

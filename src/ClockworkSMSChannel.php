@@ -1,13 +1,13 @@
 <?php
 
-namespace NotificationChannels\:channel_namespace;
+namespace NotificationChannels\ClockworkSMS;
 
-use NotificationChannels\:channel_namespace\Exceptions\CouldNotSendNotification;
-use NotificationChannels\:channel_namespace\Events\MessageWasSent;
-use NotificationChannels\:channel_namespace\Events\SendingMessage;
+use NotificationChannels\ClockworkSMS\Exceptions\CouldNotSendNotification;
+use NotificationChannels\ClockworkSMS\Events\MessageWasSent;
+use NotificationChannels\ClockworkSMS\Events\SendingMessage;
 use Illuminate\Notifications\Notification;
 
-class :service_nameChannel
+class Clockwork MSChannel
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class :service_nameChannel
      * @param mixed $notifiable
      * @param \Illuminate\Notifications\Notification $notification
      *
-     * @throws \NotificationChannels\:channel_namespace\Exceptions\CouldNotSendNotification
+     * @throws \NotificationChannels\ClockworkSMS\Exceptions\CouldNotSendNotification
      */
     public function send($notifiable, Notification $notification)
     {
