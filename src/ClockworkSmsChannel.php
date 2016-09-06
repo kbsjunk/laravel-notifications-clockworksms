@@ -36,7 +36,7 @@ class ClockworkSmsChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $to = $notifiable->routeNotificationFor('clockworksms')) {
+        if (! $to = $notifiable->routeNotificationFor('clockwork_sms')) {
             if (! $to = $notifiable->phone_number) {
                 return;
             }
