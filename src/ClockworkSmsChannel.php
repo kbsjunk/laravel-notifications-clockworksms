@@ -6,6 +6,7 @@ use NotificationChannels\ClockworkSms\Exceptions\CouldNotSendNotification;
 use Illuminate\Notifications\Events\NotificationFailed;
 use Illuminate\Notifications\Notification;
 use MJErwin\Clockwork\ClockworkClient;
+use Illuminate\Events\Dispatcher;
 use Exception;
 
 class ClockworkSmsChannel
@@ -15,9 +16,15 @@ class ClockworkSmsChannel
      */
     protected $client;
 
-    public function __construct(ClockworkClient $client)
+    /**
+     * @var \Illuminate\Events\Dispatcher
+     */
+    private $events;
+
+    public function __construct(ClockworkClient $client, Dispatcher $events)
     {
         $this->client = $client;
+        $this->events = $events
     }
 
     /**
