@@ -1,10 +1,4 @@
-Use this repo as a skeleton for your new channel, once you're done please submit a Pull Request on [this repo](https://github.com/laravel-notification-channels/new-channels) with all the files.
-
-Here's the latest documentation on Laravel 5.3 Notifications System:
-
-https://laravel.com/docs/master/notifications
-
-# A Boilerplate repo for contributions
+# Clockwork SMS channel for Laravel 5.3 Notifications
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/laravel-notification-channels/clockworksms.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/clockworksms)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
@@ -15,16 +9,12 @@ https://laravel.com/docs/master/notifications
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/laravel-notification-channels/clockworksms/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/laravel-notification-channels/clockworksms/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/laravel-notification-channels/clockworksms.svg?style=flat-square)](https://packagist.org/packages/laravel-notification-channels/clockworksms)
 
-This package makes it easy to send notifications using [Clockwork SMS](link to service) with Laravel 5.3.
-
-This is where your description should go. Add a little code example so build can understand real quick how the package can be used. Try and limit it to a paragraph or two.
-
-
+This package makes it easy to send notifications using [Clockwork SMS](https://www.clockworksms.com) with Laravel 5.3.
 
 ## Contents
 
 - [Installation](#installation)
-	- [Setting up the Clockwork SMS service](#setting-up-the-Clockwork SMS-service)
+	- [Setting up the Clockwork SMS service](#setting-up-the-clockwork-sms-service)
 - [Usage](#usage)
 	- [Available Message methods](#available-message-methods)
 - [Changelog](#changelog)
@@ -62,9 +52,9 @@ Add your Clockwork SMS API Key, From Number and other options (optional) to your
 ...
 'clockworksms' => [
     'key' => env('CLOCKWORKSMS_KEY'),
-    'from' => env('CLOCKWORKSMS_FROM'), //optional
-    'truncate' => null, // optional: true or false
-    'invalid_chars' => null, // optional: 'error', 'remove', 'replace'
+    'from' => env('CLOCKWORKSMS_FROM'), // optional, uses account default if null
+    'truncate' => null, // optional, uses account default if null: true, false
+    'invalid_chars' => null, // optional, uses account default if null: 'error', 'remove', 'replace'
 ],
 ...
 ```
@@ -110,7 +100,7 @@ public function routeNotificationForClockworkSms()
 - `from('')`: Accepts a phone number or name to use as the notification sender. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#from))
 - `content('')`: Accepts a string value for the notification body. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#content))
 - `truncate('')`: Accepts a boolean value for whether the notification will be truncated if too long. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#truncate))
-- `invalidChars('')`: Accepts a string value of 'error', 'replace' or 'remove' to determine what will be done with invalid characters in the message. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#invalidcharaction))
+- `invalidChars('')`: Accepts a string value of `'error'`, `'replace'` or `'remove'` to determine what will be done with invalid characters in the message. ([Documentation](https://www.clockworksms.com/doc/clever-stuff/xml-interface/send-sms/#invalidcharaction))
 
 ## Changelog
 
