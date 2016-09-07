@@ -46,22 +46,22 @@ class ClockworkSmsChannel
         try {
             $message = $notification->toClockworkSms($notifiable);
 
-        if (is_string($message)) {
-            $message = new ClockworkSmsMessage($message);
-        }
+            if (is_string($message)) {
+                $message = new ClockworkSmsMessage($message);
+            }
 
-        if (! $message instanceof ClockworkSmsMessage) {
-            throw CouldNotSendNotification::invalidMessageObject($message);
-        }
+            if (! $message instanceof ClockworkSmsMessage) {
+                throw CouldNotSendNotification::invalidMessageObject($message);
+            }
 
-        $message->to($to);
-        $message->from(config('services.clockworksms.from'));
+            $message->to($to);
+            $message->from(config('services.clockworksms.from'));
 
-        if (! $message->isValid()) {
-            throw CouldNotSendNotification::invalidMessageObject($message);
-        }
+            if (! $message->isValid()) {
+                throw CouldNotSendNotification::invalidMessageObject($message);
+            }
 
-        $this->sendMessage($message);
+            $this->sendMessage($message);
         } catch (Exception $exception) {
             $this->events->fire(new NotificationFailed($notifiable, $notification, 'clockworksms', ['message' => $exception->getMessage()]));
         }
