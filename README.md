@@ -47,7 +47,7 @@ You must install the service provider:
 
 ### Setting up the Clockwork SMS service
 
-Add your Clockwork SMS API Key, From Number and other options (optional) to your `config/services.php`:
+Add your Clockwork SMS API Key, From Number and other options (optional) to your `config/services.php` and `.env` files:
 
 ```php
 // config/services.php
